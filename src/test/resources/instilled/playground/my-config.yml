@@ -1,0 +1,25 @@
+stringProperty:   "abc"
+
+intProperty:      100
+
+doubleProperty:   100.5
+
+sub:
+  stringProperty: "def"
+  list:
+    - 1
+    - 2
+    - 3
+    - 4
+
+list:
+  - 1
+  - 2
+  - 3
+  - 4
+  
+listComplex:
+  - { stringProperty: "1" }
+  - { stringProperty: "2" }
+  - { stringProperty: "3" }
+  - { stringProperty: "4" }

@@ -1,0 +1,20 @@
+
+# Platform file
+.DS_Store
+
+# Editor files
+.settings
+.project
+.classpath
+target
+.lein-*
+doc/tags
+*.swp
+.idea
+tags
+
+# Binaries
+*.pyc
+.tags
+.nrepl-*
+.lein-*
