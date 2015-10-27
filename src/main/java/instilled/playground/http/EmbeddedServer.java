@@ -1,5 +1,18 @@
 package instilled.playground.http;
 
+import static io.undertow.servlet.Servlets.deployment;
+import static io.undertow.servlet.Servlets.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.ws.rs.core.Application;
 
 import org.jboss.resteasy.cdi.CdiInjectorFactory;
@@ -7,6 +20,7 @@ import org.jboss.resteasy.plugins.server.undertow.UndertowJaxrsServer;
 import org.jboss.resteasy.spi.ResteasyDeployment;
 import org.jboss.weld.environment.servlet.Listener;
 
+import instilled.playground.http.api.TestEvent;
 import io.undertow.Undertow;
 import io.undertow.servlet.Servlets;
 import io.undertow.servlet.api.DeploymentInfo;
@@ -51,6 +65,22 @@ public class EmbeddedServer {
 		return _server.undertowDeployment(deployment, _appPath);
 	}
 
+	public DeploymentInfo deployApplication2() {
+		DeploymentInfo di = deployment()//
+				.setClassLoader(MyGenericServlet.class.getClassLoader()).setContextPath(_contextPath)//
+				.setDeploymentName("w.war") //
+				.setContextPath("/abc") //
+				.addListeners(Servlets.listener(org.jboss.weld.environment.servlet.Listener.class))//
+				.addServlets(//
+						servlet("MyGenericServlet", //
+								MyGenericServlet.class) //
+										.addInitParam("message", "Hello World")//
+										.addMapping("/mygeneric")//
+										.setLoadOnStartup(1));//
+
+		return di;
+	}
+
 	public void start() {
 		final DeploymentInfo deploymentInfo = deployApplication() //
 				.setClassLoader(EmbeddedServer.class.getClassLoader()) //
@@ -59,5 +89,31 @@ public class EmbeddedServer {
 				.addListeners(Servlets.listener(Listener.class));
 
 		_server.deploy(deploymentInfo);
+		_server.deploy(deployApplication2());
+	}
+
+	private static class MyGenericServlet extends GenericServlet {
+
+		private static final long serialVersionUID = 6516214582202883633L;
+
+		@Inject
+		Event<TestEvent> testEvent;
+
+		@Override
+		public void init(ServletConfig config) throws ServletException {
+			super.init(config);
+			System.out.println("init param: " + config.getInitParameter("message"));
+			testEvent.fire(new TestEvent("100"));
+		}
+
+		@Override
+		public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+			System.out.println(req);
+			res.setContentType("text/plain");
+
+			PrintWriter out = res.getWriter();
+			out.println("Hello.");
+		}
+
 	}
 }

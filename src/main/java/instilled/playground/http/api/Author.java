@@ -2,7 +2,6 @@ package instilled.playground.http.api;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -21,7 +20,7 @@ public class Author implements Resource {
 	// private HttpServletResponse response;
 	
 	@Inject
-    Event<RequestEvent> creditEvent;
+    Event<TestEvent> testEvent;
 
 	@Inject
 	@CljFn("http.service.author/say-hello")
@@ -30,7 +29,7 @@ public class Author implements Resource {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String bySize(@DefaultValue("10") @QueryParam("size") int size) {
-		creditEvent.fire(new RequestEvent("awesome!"));
+		testEvent.fire(new TestEvent("awesome!"));
 		return sayHello.invoke(size);
 	}
 

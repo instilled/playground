@@ -1,9 +1,9 @@
 package instilled.playground.http.api;
 
-public class RequestEvent {
+public class TestEvent {
 	private String _n;
 
-	public RequestEvent(String n) {
+	public TestEvent(String n) {
 		_n = n;
 	}
 
