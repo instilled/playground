@@ -35,7 +35,7 @@ public class EmbeddedServer {
 
 	public EmbeddedServer(final String host, final Integer port) {
 		Undertow.Builder serverBuilder = Undertow.builder().addHttpListener(port, host);
-		this._server.start(serverBuilder);
+		_server.start(serverBuilder);
 	}
 
 	public EmbeddedServer contextPath(final String contextPath) {
@@ -77,7 +77,7 @@ public class EmbeddedServer {
 										.addInitParam("message", "Hello World")//
 										.addMapping("/mygeneric")//
 										.setLoadOnStartup(1));//
-
+		
 		return di;
 	}
 

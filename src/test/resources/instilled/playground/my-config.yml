@@ -11,6 +11,8 @@ sub:
     - 2
     - 3
     - 4
+  sub2:
+    longProperty: 199
 
 list:
   - 1

@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>org.clojure</groupId>
 			<artifactId>clojure</artifactId>
-			<version>1.7.0</version>
+			<version>1.8.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -63,8 +63,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
-			<artifactId>weld-servlet</artifactId>
-			<version>2.3.0.Final</version>
+			<artifactId>weld-servlet-core</artifactId>
+			<version>2.3.2.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.el</groupId>

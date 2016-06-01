@@ -30,7 +30,7 @@ public final class Lang {
 	public static <T> T deepMerge(T left, T right) {
 
 		if (left instanceof Map && right instanceof Map) {
-			Map<Object, Object> l = new HashMap<Object, Object>((Map<Object, Object>) left);
+			Map<Object, Object> l = new HashMap<>((Map<Object, Object>) left);
 			Map<Object, Object> r = (Map<Object, Object>) right;
 			for (Map.Entry<Object, Object> e : r.entrySet()) {
 				Object k = e.getKey();
@@ -40,7 +40,7 @@ public final class Lang {
 			}
 			return (T) l;
 		} else if (left instanceof List && right instanceof List) {
-			List<Object> l = new ArrayList<Object>((List<Object>) left);
+			List<Object> l = new ArrayList<>((List<Object>) left);
 			List<Object> r = (List<Object>) right;
 			for (int i = 0; i < r.size(); i++) {
 				if (r.get(i) != null) {
