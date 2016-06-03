@@ -1,10 +1,10 @@
 package instilled.playground.spring.bean;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AwesomeBean {
 
-	@Autowired
 	public AwesomeBean() {
 		
 	}

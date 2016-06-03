@@ -1,4 +1,4 @@
-package instilled.playground.spring;
+package instilled.playground.spring.bean;
 
 import java.util.Arrays;
 
@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackageClasses = { Main.class })
 public class Main {
 
 	public static void main(String[] args) {
